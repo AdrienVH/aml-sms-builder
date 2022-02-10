@@ -1,0 +1,77 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>Envoyer une localisation AML via SMS</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="description" content="" />
+		<meta name="keywords" content="" />
+		<!-- CSS -->
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+		<link href="https://openlayers.org/en/v6.3.1/css/ol.css" type="text/css" rel="stylesheet">
+		<link href="./main.css?v=dfezfjpiefzphfe" rel="stylesheet">
+		<!-- CSS -->
+	</head>
+	<body>
+		<div id="wrapper">
+			<table>
+				<tr><td class="label">Latitude (WGS84) :</td><td class="input"><input type="text" id="lt" value="+48.538911" /></td></tr>
+				<tr><td>Longitude (WGS84) :</td><td><input type="text" id="lg" value="+2.659580" /></td></tr>
+				<tr><td>Radius (meters) :</td><td><input type="text" id="rd" value="1000" /></td></tr>
+				<tr><td>Time of Positioning :</td><td><input type="text" id="top" value="" /></td></tr>
+				<tr><td>Level of Confidence :</td><td><input type="text" id="lc" value="95" /></td></tr>
+				<tr><td>Positioning Method :</td><td>
+					<select id="pm">
+						<option value="G">GNSS (G)</option>
+						<option value="W">Wifi signal (W)</option>
+						<option value="C">Cell (C)</option>
+					</select>
+				</td></tr>
+				<tr><td>IMSI :</td><td><input type="text" id="si" value="234302543446355" /></td></tr>
+				<tr><td>IMEI :</td><td><input type="text" id="ei" value="357365093474415" /></td></tr>
+				<tr><td>Mobile Country Code :</td><td>
+					<select id="mcc">
+						<!-- https://fr.wikipedia.org/wiki/Mobile_country_code -->
+						<option value="208">France (208)</option>
+						<option value="206">Belgique (206)</option>
+						<option value="204">Pays-Bas (204)</option>
+						<option value="214">Espagne (214)</option>
+						<option value="222">Italie (222)</option>
+						<option value="228">Suisse (228)</option>
+						<option value="262">Allemagne (262)</option>
+						<option value="270">Luxembourg (270)</option>
+					</select>
+				</td></tr>
+				<tr><td>Mobile Network Code :</td><td>
+					<select id="mnc">
+						<!-- https://fr.wikipedia.org/wiki/Mobile_Network_Code -->
+						<option value="01">Orange (01)</option>
+						<option value="10">SFR (10)</option>
+						<option value="15">Free Mobile (15)</option>
+						<option value="20">Bouygues Telecom (20)</option>
+					</select>
+				</td></tr>
+			</table>
+			<div id="mapblock">
+				<div id="map"></div>
+				<div id="title">Longitude / Latitude</div>
+			</div>
+			<p class="button build">Envoyer cette localisation AML via SMS</p>
+			<p class="sms"></p>
+			<div id="search">
+				<h2>Rechercher une adresse BAN :</h2>
+				<input type="text" id="query" value="" placeholder="Adresse postale, lieu-dit, etc." />
+				<p class="button search">Rechercher</p>
+				<ul class="results"></ul>
+				<p class="cancel">Annuler</p>
+			</div>
+			<div id="showsearchpanel">BAN</div>
+		</div>
+		<!-- JAVASCRIPT -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="https://openlayers.org/en/v6.3.1/build/ol.js"></script>
+		<script src="./main.js?v=dfezfjpiefzphfe"></script>
+		<!-- JAVASCRIPT -->
+	</body>
+</html>
