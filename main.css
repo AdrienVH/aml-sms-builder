@@ -96,19 +96,16 @@ select {
 
 #showsearchpanel {
 	position:absolute;
-	top:18px;
-	right:20px;
-	width:45px;
-	height:31px;
-	padding-top:14px;
+	top:19px;
+	right:18px;
+	padding:4px;
 	background-color: #4c5268;
-	border-radius:50%;
+	border-radius:4px;
 	color:white;
-	font-size:15px;
+	font-size:13px;
 	text-align:center;
 	border:1px solid #4c5268;
 	cursor:pointer;
-	font-family: Arial;
 }
 
 #search {
