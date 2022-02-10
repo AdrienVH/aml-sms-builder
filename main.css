@@ -124,11 +124,11 @@ select {
 	margin-bottom:15px;
 }
 
-#search ul.results {
+#search ul {
 	list-style-type: none;
 }
 
-#search ul.results li {
+#search ul li {
 	display:block;
 	padding:5px 8px;
 	margin-bottom:5px;

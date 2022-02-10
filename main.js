@@ -148,6 +148,7 @@ document.addEventListener('gesturestart', function (e) {
 });
 
 function searchAddress(query){
+	$('#search h2.recents').hide()
 	$('#search ul li').remove()
 
 	var request = $.ajax({
@@ -157,19 +158,20 @@ function searchAddress(query){
 	});
 
 	request.done(function(result) {
-		// Results
 		if (result.features.length > 0) {
 			for (const feature of result.features) {
 				if (feature.properties.score > 0.5) {
 					var label = feature.properties.label
 					var li = $('<li data-lg="'+feature.geometry.coordinates[0]+'" data-lt="'+feature.geometry.coordinates[1]+'">' + label + '</li>').appendTo('#search ul.results')
 					li.click(function(){
-						$('#lg').val('+' + $(this).data('lg'))
 						$('#lt').val('+' + $(this).data('lt'))
+						$('#lg').val('+' + $(this).data('lg'))
 						$('#rd').val(50)
 						addCircleToMap()
 						$('#search').hide()
 						$('#showsearchpanel').show()
+						// Sauvegarde parmi les localisations récentes
+						saveAddress($(this).html(), $(this).data('lt'), $(this).data('lg'))
 					});
 				}
 			}
@@ -191,6 +193,25 @@ $( "#showsearchpanel" ).click(function() {
 	$('#search ul li').remove()
 	$('#search').show()
 	$('#showsearchpanel').hide()
+	// Affichage des localisations récentes
+	let addresses = localStorage.getItem('addresses')
+	if (addresses) {
+		$('#search h2.recents').show()
+		addresses = JSON.parse(addresses)
+		for (const address of addresses) {
+			var li = $('<li data-lg="'+address.lg+'" data-lt="'+address.lt+'">' + address.label + '</li>').appendTo('#search ul.recents')
+			li.click(function(){
+				$('#lt').val('+' + $(this).data('lt'))
+				$('#lg').val('+' + $(this).data('lg'))
+				$('#rd').val(50)
+				addCircleToMap()
+				$('#search').hide()
+				$('#showsearchpanel').show()
+			});
+		}
+	} else {
+		$('#search h2.recents').hide()
+	}
 });
 
 $( ".search" ).click(function() {
@@ -222,4 +243,16 @@ function updateSms() {
 	setTimeOfPositionning()
 	var sms = buildSms()
 	$('.sms').html(sms)
+}
+
+function saveAddress(label, lt, lg) {
+	let addresses = localStorage.getItem('addresses')
+	if (addresses) {
+		addresses = JSON.parse(addresses)
+	} else {
+		addresses = []
+	}
+	addresses.unshift({label, lt, lg})
+	addresses = addresses.slice(0, 15)
+	localStorage.setItem('addresses', JSON.stringify(addresses))
 }
