@@ -97,14 +97,13 @@ select {
 #showsearchpanel {
 	position:absolute;
 	top:19px;
-	right:18px;
-	padding:4px;
+	right:19px;
+	padding:5px;
 	background-color: #4c5268;
 	border-radius:4px;
 	color:white;
 	font-size:13px;
 	text-align:center;
-	border:1px solid #4c5268;
 	cursor:pointer;
 }
 

@@ -71,17 +71,8 @@ if ("geolocation" in navigator) {
 		$('#lg').val('+'+position.coords.longitude.toFixed(6))
 		$('#rd').val(Math.round(position.coords.accuracy))
 		addCircleToMap()
-	});
+	}, () => {}, { enableHighAccuracy: true })
 }
-
-/*var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-if (connection) {
-	for(i in connection){
-		$('p.network').append('<p>'+i+'='+connection[i]+'</p>')
-	}
-}else{
-	$('p.network').append('<p>ko</p>')
-}*/
 
 var basemap = new ol.layer.Tile({
 	source: new ol.source.XYZ({
