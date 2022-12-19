@@ -2,19 +2,22 @@ L'Advanced Mobile Location (AML) est un service de géolocalisation d'urgence di
 
 Cette application permet de construire un SMS en respectant le format utilisé par l'AML. Ce SMS doit être envoyé avec le même numéro que celui qui passe l'appel d'urgence. Le destinataire de ce SMS doit être le numéro de téléphone de la platerforme AML.
 
+
+![](screenshot1.png "Screenshot 1") ![](screenshot2.png "Screenshot 2")
+
 # Format du message
 
-Un message envoyé par l'AML est un ensemble de paires clef/valeur (clef=valeur), séparées par des points-virgules (;).
+Un message envoyé par l'AML est un ensemble de paires clef/valeur (clef=valeur), séparées par des points-virgules.
 
 La première paire clef/valeur est une sorte d'entête obligatoire :
 
-    (A"ML=1)
+    A"ML=1
 
 En considérant les points-virgules comme séparateurs pour le message suivant...
 
     A"ML=1;lt=+48.902963;lg=+2.516582;rd=1964;top=20220210134654;lc=95;pm=G;si=234302543446355;ei=357365093474415;mcc=208;mnc=01;ml=131
 
-...on identifie facilement les paires clef/valeur (clef=valeur):
+...on identifie facilement toutes les paires clef/valeur (clef=valeur):
 
     A"ML=1
     lt=+48.902963
