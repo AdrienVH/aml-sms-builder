@@ -10,7 +10,7 @@
 		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
 		<link href="./ol.css" type="text/css" rel="stylesheet">
-		<link href="./main.css?v=fezabfeiza" rel="stylesheet">
+		<link href="./main.css?v=1774629534" rel="stylesheet">
 		<!-- CSS -->
 	</head>
 	<body>
@@ -40,9 +40,10 @@
 					<td>Positioning Method :</td>
 					<td>
 						<select id="pm">
-							<option value="G">GNSS (G)</option>
-							<option value="W">Wifi signal (W)</option>
+							<option value="W">Wi-Fi (W)</option>
+							<option value="G">GPS (G)</option>
 							<option value="C">Cell (C)</option>
+							<option value="N">Null (N)</option>
 						</select>
 					</td>
 				</tr>
@@ -85,8 +86,27 @@
 				<div id="map"></div>
 				<div id="title">Localisation</div>
 			</div>
-			<p class="button build">Envoyer cette localisation AML via SMS</p>
-			<p class="sms"></p>
+			<div id="showendpointspanel">Renseigner les endpoints 18 et 112</div>
+			<div id="buttons">
+				<p class="button send" data-endpoint="18">Envoyer le SMS (appel au 18)</p>
+				<p class="button send" data-endpoint="112">Envoyer le SMS (appel au 112)</p>
+			</div>
+			<!-- PANEL ENDPOINTS -->
+			<div id="endpoints">
+				<h2>Enregistrer les endpoints :</h2>
+				<div>
+					<p>Endpoint "18" :</p>
+					<p>Endpoint "112" :</p>
+				</div>
+				<div>
+					<input type="text" id="endpoint18" value="" placeholder="Endpoint AML (18)" />
+					<input type="text" id="endpoint112" value="" placeholder="Endpoint AML (112)" />
+				</div>
+				<p class="button save">Enregistrer</p>
+				<p class="cancel">Annuler</p>
+			</div>
+			<!-- PANEL SEARCH -->
+			<div id="showsearchpanel">Rechercher<br/>une adresse</div>
 			<div id="search">
 				<h2>Rechercher une adresse :</h2>
 				<input type="text" id="query" value="" placeholder="Adresse postale, lieu-dit, etc." />
@@ -96,12 +116,11 @@
 				<ul class="recents"></ul>
 				<p class="cancel">Annuler</p>
 			</div>
-			<div id="showsearchpanel">Rechercher<br/>une adresse</div>
 		</div>
 		<!-- JAVASCRIPT -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 		<script src="./ol.js"></script>
-		<script src="./main.js?v=fezabfeiza"></script>
+		<script src="./main.js?v=1774629534"></script>
 		<!-- JAVASCRIPT -->
 	</body>
 </html>

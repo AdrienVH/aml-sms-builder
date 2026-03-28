@@ -1,5 +1,7 @@
 .PHONY: cleanDev watchDev startDev clean watch start
 
+VERSION := $(shell date +%s)
+
 cleanDev:
 		docker-compose -f docker-compose.dev.yml down --remove-orphans
 		docker image prune -f
@@ -17,7 +19,9 @@ clean:
 		docker volume prune -f
 
 watch:
+		sed -i 's/?v=[^"]*/?v=$(VERSION)/g' front/src/index.html
 		docker-compose up --build
 
 start:
+		sed -i 's/?v=[^"]*/?v=$(VERSION)/g' front/src/index.html
 		docker-compose up --build -d
