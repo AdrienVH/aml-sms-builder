@@ -9,7 +9,8 @@
 		<!-- CSS -->
 		<link href="https://fonts.googleapis.com/css2?family=Roboto+Mono&display=swap" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
-		<link href="./ol.css" type="text/css" rel="stylesheet">
+		<link href="https://api.mapbox.com/mapbox-gl-js/v3.20.0/mapbox-gl.css" rel="stylesheet">
+		<script src="https://api.mapbox.com/mapbox-gl-js/v3.20.0/mapbox-gl.js"></script>
 		<link href="./main.css?v=1774629534" rel="stylesheet">
 		<!-- CSS -->
 	</head>
@@ -18,11 +19,11 @@
 			<table>
 				<tr>
 					<td class="label">Latitude (WGS84) :</td>
-					<td class="input"><input type="text" id="lt" value="+48.538911" /></td>
+					<td class="input"><input type="text" id="lt" value="+48.536444" /></td>
 				</tr>
 				<tr>
 					<td>Longitude (WGS84) :</td>
-					<td><input type="text" id="lg" value="+2.659580" /></td>
+					<td><input type="text" id="lg" value="+2.658268" /></td>
 				</tr>
 				<tr>
 					<td>Radius (meters) :</td>
@@ -82,10 +83,7 @@
 					</td>
 				</tr>
 			</table>
-			<div id="mapblock">
-				<div id="map"></div>
-				<div id="title">Localisation</div>
-			</div>
+			<div id="map"></div>
 			<div id="showendpointspanel">Renseigner les endpoints 18 et 112</div>
 			<div id="buttons">
 				<p class="button send" data-endpoint="18">Envoyer le SMS (appel au 18)</p>
@@ -119,7 +117,6 @@
 		</div>
 		<!-- JAVASCRIPT -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-		<script src="./ol.js"></script>
 		<script src="./main.js?v=1774629534"></script>
 		<!-- JAVASCRIPT -->
 	</body>

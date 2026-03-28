@@ -69,50 +69,25 @@ function formatCoordinate(coordinate) {
 	return coordinate >= 0 ? '+' + coordinate.toFixed(6) : coordinate.toFixed(6)
 }
 
-var basemap = new ol.layer.Tile({
-	source: new ol.source.XYZ({
-		url: 'https://api.mapbox.com/styles/v1/adrienvh/cldf033fp001e01o9ymftsm1q/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiYWRyaWVudmgiLCJhIjoiU2lDV0N5cyJ9.2pFJAwvwZ9eBKKPiOrNWEw'
-	}),
-	name: "basemap"
+mapboxgl.accessToken = 'pk.eyJ1IjoiYWRyaWVudmgiLCJhIjoiU2lDV0N5cyJ9.2pFJAwvwZ9eBKKPiOrNWEw'
+const map = new mapboxgl.Map({
+	container: 'map',
+	style: 'mapbox://styles/adrienvh/cmn96h2ao003j01qs1ly49mts',
+	projection: 'globe',
+	zoom: 17,
+	center: [2.349326, 48.826073]
 })
-
-function getLocalisantsStyle(f){
-	if(f.getGeometry().getType() == 'Point'){
-		return new ol.style.Style({
-			text: new ol.style.Text({
-				font:'normal 18px "Arial"',
-				text:"+",
-				fill: new ol.style.Fill({color: '#056d59'})
-			})
-		})
-	}else{
-		return new ol.style.Style({
-			stroke: new ol.style.Stroke({color: '#056d59', width: 1})
-		})
-	}
+map.addControl(new mapboxgl.NavigationControl())
+map.scrollZoom.disable()
+map.on('style.load', () => {
+	map.setFog({})
+})
+function rotateCamera(timestamp) {
+	map.rotateTo((timestamp / 100) % 360, { duration: 0 })
+	requestAnimationFrame(rotateCamera)
 }
-
-var localisantsSource = new ol.source.Vector({projection : 'EPSG:3857'})
-var localisants = new ol.layer.Vector({
-	source: localisantsSource,
-	style: getLocalisantsStyle,
-	name: "localisants"
-})
-
-var map = new ol.Map({
-	layers: [basemap, localisants],
-	target: document.getElementById('map'),
-	view: new ol.View({
-		center: ol.proj.transform([2.668288, 48.532930], 'EPSG:4326','EPSG:3857'),
-		zoom: 17,
-		minZoom:4,
-		maxZoom:20
-	}),
-	controls : ol.control.defaults({
-		attribution : false,
-		zoom : false
-	})
-})
+map.on('load', () => { rotateCamera(0) })
+let marker = null
 
 $('#lg, #lt, #rd').change(function(){
 	if($('#lg').val() != '' && $('#lt').val() != '' && $('#rd').val() != ''){
@@ -127,12 +102,10 @@ $('#lg, #lt, #rd').keyup(function(){
 })
 
 function addCircleToMap(){
-	localisantsSource.clear()
-	var centerLongitudeLatitude = ol.proj.fromLonLat([$('#lg').val(), $('#lt').val()])
-	localisantsSource.addFeature(new ol.Feature(new ol.geom.Point(centerLongitudeLatitude)))
-	localisantsSource.addFeature(new ol.Feature(new ol.geom.Circle(centerLongitudeLatitude, parseInt($('#rd').val()))))
-	map.getView().fit(localisantsSource.getExtent())
-	map.getView().setZoom(map.getView().getZoom() - 0.5)
+	if (marker) marker.remove()
+	marker = new mapboxgl.Marker({ color: '#056d59' }).setLngLat([$('#lg').val(), $('#lt').val()]).addTo(map)
+	map.setCenter([$('#lg').val(), $('#lt').val()])
+	map.setPitch(50)
 }
 
 addCircleToMap()
