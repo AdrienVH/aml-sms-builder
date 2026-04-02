@@ -32,12 +32,12 @@ function buildSms(){
 }
 
 $(".send").click(function() {
-	const callee = $(this).data('endpoint')
 	const sms = buildSms()
+	const callee = $(this).data('endpoint')
 	const endpoint = localStorage.getItem(`endpoint${callee}`)
+	location.href = endpoint ? `sms:${endpoint}?body=${encodeURIComponent(sms)}` : `sms:?body=${encodeURIComponent(sms)}`
 	console.info('Endpoint :', endpoint)
 	console.info('Body :', sms)
-	location.href = `sms:${endpoint}?body=${encodeURIComponent(sms)}`
 })
 
 function setTimeOfPositionning() {
@@ -77,11 +77,8 @@ const map = new mapboxgl.Map({
 	zoom: 17,
 	center: [2.349326, 48.826073]
 })
-map.addControl(new mapboxgl.NavigationControl())
 map.scrollZoom.disable()
-map.on('style.load', () => {
-	map.setFog({})
-})
+map.on('style.load', () => { map.setFog({}) })
 function rotateCamera(timestamp) {
 	map.rotateTo((timestamp / 100) % 360, { duration: 0 })
 	requestAnimationFrame(rotateCamera)
